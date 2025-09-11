@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6180994217650223247
+--- !u!1001 &6577117946191065103
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.8990273
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.13201322
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.29577735
+      value: 5.71
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       propertyPath: m_Name
-      value: Bullet Spawner
+      value: Bullet Spawner (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70,23 +70,41 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1908115615396476725}
+      addedObject: {fileID: 2110789516556428092}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -442808047568197267}
+      addedObject: {fileID: 7808248333956155372}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2508347684240656523}
   m_SourcePrefab: {fileID: 100100000, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
---- !u!1 &6414855057464215006 stripped
+--- !u!1 &6307278346667265374 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b81f0aee960f45498cd2b3798572455, type: 3}
-  m_PrefabInstance: {fileID: 6180994217650223247}
+  m_PrefabInstance: {fileID: 6577117946191065103}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1908115615396476725
+--- !u!114 &2110789516556428092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6307278346667265374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487762ba896f1804083a653a43a25751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 3013747852038217975, guid: 2681c733ab1e6dd46afbdc864ff40978, type: 3}
+  spawnRateMin: 0.5
+  spawnRateMax: 3
+--- !u!54 &7808248333956155372
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6414855057464215006}
+  m_GameObject: {fileID: 6307278346667265374}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -107,18 +125,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-442808047568197267
-MonoBehaviour:
+--- !u!135 &2508347684240656523
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6414855057464215006}
+  m_GameObject: {fileID: 6307278346667265374}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487762ba896f1804083a653a43a25751, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 5887095859636820052, guid: 4e17af55b4d3f5144aeda9e74ec7697c, type: 3}
-  spawnRateMin: 0.5
-  spawnRateMax: 3
+  serializedVersion: 3
+  m_Radius: 0.8199635
+  m_Center: {x: -0.05970794, y: 0.78520197, z: -0.03166631}

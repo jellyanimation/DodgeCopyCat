@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 6607239064781431028}
   - component: {fileID: 1987453912498842051}
   - component: {fileID: 8868795281379242951}
+  - component: {fileID: 848527113058837045}
   m_Layer: 0
   m_Name: PLAYER_Slime Leaf Yummy Face
   m_TagString: Player
@@ -261,7 +262,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c5b0aec84f86e41813571e476df2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRigidbody: {fileID: 1987453912498842051}
   speed: 8
+--- !u!135 &848527113058837045
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6277676328403658442}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.37
+  m_Center: {x: 0, y: 0.39, z: 0}
 --- !u!1 &7377364336656593288
 GameObject:
   m_ObjectHideFlags: 0

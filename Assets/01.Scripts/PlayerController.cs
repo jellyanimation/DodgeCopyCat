@@ -1,45 +1,76 @@
 using UnityEngine;
+using UnityEngine.UI; // UI ê´€ë ¨
 
 public class PlayerController : MonoBehaviour
 {
-    // Á¢±Ù ÇÑÁ¤ÀÚ ´ãÀº Å¸ÀÔ ½Äº°ÀÚ (º¯¼ö¸í) -º¯¼ö ¼±¾ğ
-    public Rigidbody playerRigidbody; //ÀÌµ¿¿¡ »ç¿ëÇÒ ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ®
-    public float speed = 8f;         //ÀÌµ¿ ¼Ó·Â
+    public Rigidbody playerRigidbody;
+    public float speed = 8f;
 
+    // ì—ë„ˆì§€ë°” ê´€ë ¨
+    public Image energyBarImage;          // Canvas í•˜ìœ„ Image
+    public Sprite energyFull;             // ì²´ë ¥ 3ë‹¨ê³„
+    public Sprite energyHalf;             // ì²´ë ¥ 2ë‹¨ê³„
+    public Sprite energyEmpty;            // ì²´ë ¥ 1ë‹¨ê³„
+    private int health = 3;               // ì´ˆê¸° ì²´ë ¥ 3
 
-    void Start() //À¯´ÏÆ¼¿¡¼­ Á¦°øÇÏ´Â ÀÌº¥Æ® ¸Ş¼­µå·Î ½ÃÀÛÇÒ¶§ ÇÑ¹ø½ÇÇà
+    void Start()
     {
-        //°ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ Rigidbody ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ playerRigidbody¿¡ ÇÒ´ç
         playerRigidbody = GetComponent<Rigidbody>();
+        energyBarImage.sprite = energyFull; // ì‹œì‘ ì‹œ ì—ë„ˆì§€ë°” Full
     }
 
-
-    void Update() //À¯´ÏÆ¼¿¡¼­ Á¦°øÇÏ´Â ÀÌº¥Æ® ¸Ş¼­µå·Î ¹İº¹½ÇÇà
+    void Update()
     {
-        //¼öÆòÃà°ú ¼öÁ÷ÃàÀÇ ÀÔ·Â°ªÀ» °¨ÁöÇÏ¿© ÀúÀå
         float xInput = Input.GetAxis("Horizontal");
         float zInput = Input.GetAxis("Vertical");
 
-        //½ÇÁ¦ ÀÌµ¿ ¼Óµµ¸¦ ÀÔ·Â°ª°ú ÀÌµ¿ ¼Ó·ÂÀ» ÅëÇØ °áÁ¤
-        float xSpeed = xInput * speed;
-        float zSpeed = zInput * speed;
+        Vector3 newVelocity = new Vector3(xInput * speed, 0f, zInput * speed);
+        playerRigidbody.linearVelocity = newVelocity;
 
-        // Vector3 ¼Óµµ¸¦ (xSpeed, 0 , zSpeed);
-        Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
-        // ¸®Áöµå¹ÙµğÀÇ ¼Óµµ¿¡ newVelocity ÇÒ´ç
-        playerRigidbody.linearVelocity = newVelocity; //µ¿ÀÛ ¡Ú
+        // ğŸ‘‡ ë°”ë‹¥ ì•„ë˜ë¡œ ë–¨ì–´ì§€ë©´ ê²Œì„ ì¢…ë£Œ
+        if (transform.position.y < -5f) // ì›í•˜ëŠ” ë†’ì´ê°’(-5f)ì„ ì¡°ì • ê°€ëŠ¥
+        {
+            Die();
+        }
     }
+
+    // ì´ì•Œì— ë§ì•˜ì„ ë•Œ í˜¸ì¶œ
+    public void TakeDamage()
+    {
+        health--;
+
+        if (health == 2)
+        {
+            energyBarImage.sprite = energyHalf;   // 2ì¹¸ ë‚¨ì•˜ì„ ë•Œ â†’ ì ˆë°˜ ì•„ì´ì½˜
+        }
+        else if (health == 1)
+        {
+            energyBarImage.sprite = energyEmpty;  // 1ì¹¸ ë‚¨ì•˜ì„ ë•Œ â†’ ê±°ì˜ ë¹ˆ ì•„ì´ì½˜
+        }
+        else if (health <= 0)
+        {
+            energyBarImage.enabled = false;
+            // ì²´ë ¥ ë‹¤ ë‹³ìœ¼ë©´ â†’ ê²Œì„ ì¢…ë£Œ
+            Die();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("DeathZone"))
+        {
+            Die();
+        }
+    }
+
 
     public void Die()
     {
-        //ÀÚ½ÅÀÇ °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­
         gameObject.SetActive(false);
 
-        //¾À¿¡ Á¸ÀçÇÏ´Â GameManager Å¸ÀÔÀÇ ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ °¡Á®¿À±â
+
+
         GameManagers gameManagers = FindFirstObjectByType<GameManagers>();
-
-        //°¡Á®¿Â GameManager ¿ÀºêÁ§Æ®ÀÇ EndGame() ¸Ş¼­µå ½ÇÇà
         gameManagers.EndGame();
-
     }
 }
